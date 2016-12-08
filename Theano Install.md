@@ -16,7 +16,7 @@ pip 是一套Python套件管理程式
 `sudo apt-get install python3-pip	 #Python 3.x`
 `sudo apt-get install python-pip 	 #Python 2.x`
 
-2. 下載 [get-pip.py](https://bootstrap.pypa.io/get-pip.py)，自行用 python 編譯，會一起安裝pip跟pip3。 
+2. 下載 [get-pip.py](https://bootstrap.pypa.io/get-pip.py)，自行用 python 編譯，會一起安裝pip跟pip3
 `sudo python get-pip.py`
 
 ##前置設定
@@ -54,32 +54,32 @@ Nose為Python中的 Test framework
 
 `sudo pip3 install nose`
 
-另外還需要安裝 nose-parameterized
+另外還需要安裝 `nose-parameterized`
 
 `sudo pip3 install nose-parameterized`
 ##Install numpy 
 `sudo pip3 install numpy`
 
-測試numpy是否正常,在python的terminal下
+測試numpy是否正常，在python的terminal下
 
 `import numpy`
 `numpy.test()`
 
 
 
-要確認error要為0，表示正確安裝。
+要確認error要為 0，表示正確安裝。
 
 `nose.result.TextTestResult run=XXX errors=0 failures=0`
 
 ##Install scipy#
 `sudo pip3 install scipy`
 
-測試scipy是否正常,進python的terminal下
+測試scipy是否正常，進python的terminal下
 
 `import scipy`
 `scipy.test()`
 
-要確認error要為0，表示正確安裝。
+要確認error要為 0，表示正確安裝
 
 `nose.result.TextTestResult run=XXX errors=0 failures=0`
 
@@ -90,16 +90,16 @@ Nose為Python中的 Test framework
 
 `sudo pip3 install -v theano==0.8.0`
 
-測試theano是否正常,進python的terminal下
+測試theano是否正常，進python的terminal下
 
 `import theano`
 `theano.test()`
 
-要確認error要為0，表示正確安裝。
+要確認error要為 0，表示正確安裝。
 
 `nose.result.TextTestResult run=XXX errors=0 failures=0`
 
-若有出現error , 可以先更新theano版本看看
+若有出現error，可以先更新theano版本看看
 
 `sudo pip3 install --upgrade --no-deps git+git://github.com/Theano/Theano.git` 
 
@@ -107,7 +107,7 @@ Nose為Python中的 Test framework
 #### Install PyCUDA
 **安裝之前需要先安裝好 Nvidia drivers 和 CUDA**
 
-Python 上使用 cuda, 需要安裝 PyCUDA
+Python 上使用 cuda，需要安裝 PyCUDA
 ```
 sudo su
 pip install pycuda
@@ -216,7 +216,7 @@ CNMeM 主要是管理 CUDA 在做 deep learning 記憶體的 library
 
 `git clone https://github.com/NVIDIA/cnmem.git cnmem`
 
-編譯 cnmem, 在複製到 cuda7.5 目錄
+編譯 cnmem，在複製到 cuda7.5 目錄
 ```
 cd cnmem
 mkdir build
@@ -227,15 +227,15 @@ sudo cp include/cnmem.h /usr/local/cuda-7.5/include
 sudo cp build/*.so  /usr/local/cuda-7.5/lib64/
 ```
 若設定後無法啟動   
-可能安裝 CUDA 版本問題 (CUDA >= 7.0)或 Cuda 沒有 CNMeM header file  
+可能安裝 CUDA 版本問題 (CUDA >= 7.0) 或 Cuda 沒有 CNMeM header file  
 
 #####cuDNN
-先到 [Nvidia cuDNN](https://developer.nvidia.com/cudnn)下載 ,這邊我們使用的是 cuda-7.5
+先到 [Nvidia cuDNN](https://developer.nvidia.com/cudnn)下載，這邊我們使用的是 cuda-7.5
 下載完後解壓縮：
 
 `tar xvzf cudnn-7.5-linux-x64-v5.0-ga.tgz`
 
-解壓縮後會出現一個文件夾 `cuda`,　接著將所需的 `cuDNN` 檔案複製到 cuda安裝位置
+解壓縮後會出現一個文件夾 `cuda`，接著將所需的 `cuDNN` 檔案複製到 cuda安裝位置
 
 ```
 sudo cp cuda/include/cudnn.h /usr/local/cuda-7.5/include/
@@ -254,11 +254,11 @@ sudo chmod a+r /usr/local/cuda-7.5/lib64/libcudnn*
 `THEANO_FLAGS='cuda.root=/usr/local/cuda/' python <myscript>.py`
 3. 修改　.theanorc 設定
 
-以上方法最推薦, **第三種**作法, 如果 server 上有多種程式需要用到 cuda 話
-第一種作法可能造成 bashrc 凌亂, 或彼此設定可能造成影響
+以上方法最推薦, **第三種**作法，如果 server 上有多種程式需要用到 cuda 話
+第一種作法可能造成 bashrc 凌亂，或彼此設定可能造成影響
 第二種則每次執行很麻煩
 ##### 設定 theanorc
-一般 `.theanorc` 位置在 `~/.theanorc`, 若沒有話自行創建
+一般 `.theanorc` 位置在 `~/.theanorc`，若沒有話自行創建
 新增內容：
 ```
 [global]
@@ -272,71 +272,19 @@ fastmath = True # 設定 nvcc
 root = /usr/local/cuda-7.0/ #設定 cuda 位置
 
 [lib]
-cnmem = 1 # 設定 Theano 可以使用 gpu 上記憶體比例, 設定值為 0~1
+cnmem = 1 # 設定 Theano 可以使用 gpu 上記憶體比例， 設定值為 0~1
 ```
 
 
 ######config 解釋
 首先要了解 `.theanorc` 上 section
 theano 在設定上會有定義 Config Attributes
-device 是 `config.device`, 所在的 section 為 `[global]`
-cnmem 是 `config.lib.cnmem`, 所在 section 為 `[lib]`
-algo_fwd 是 `config.dnn.conv.algo_fwd `, 所在 section 為 `[dnn.conv]`
+device 是 `config.device`， 所在的 section 為 `[global]`
+cnmem 是 `config.lib.cnmem`， 所在 section 為 `[lib]`
+algo_fwd 是 `config.dnn.conv.algo_fwd `， 所在 section 為 `[dnn.conv]`
 
 更改裝置也可以使用上述第二種方式
 
 `THEANO_FLAGS=’cuda.root=/usr/local/cuda/bin/,device=gpu,floatX=float32’`
 
-以上設定完後可以使用 Theano 官方提供 [source code](http://deeplearning.net/software/theano/tutorial/using_gpu.html) 做測試
-執行結果會告知是使用 CPU or GPU 做計算
-
-
-
-
-
-##pyenv
-**(未必一定要安裝)**
-pyenv是一套python管控版本套件，這邊順便介紹安裝流程。
-
-依據[參考說明](https://github.com/yyuu/pyenv/wiki/Common-build-problems) 內 Common build problems 安裝一些套件
-
-`sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev git`
-
-`git clone git://github.com/yyuu/pyenv.git ~/.pyenv     # 安裝pyenv`
-`echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc`
-`echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc`
-`echo 'eval "$(pyenv init -)"' >> ~/.bashrc`
-`exec $SHELL -l`
-
-以下指令可以查詢可安裝的版本
-
-`pyenv install --list`
-
-要安裝python3.4的話，接下來我們就可以安裝python了，但是再安裝之前，我們必須要安裝python所需要的依賴包
-
-`sudo apt-get install libc6-dev gcc`
-`sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm`
-`pyenv install 3.4.3 -v`
-
-安裝完成之後，需要使用如下命令更新 repository 資訊
-
-`pyenv rehash`
-
-查看當前已經安裝的python版本
-
-`pyenv versions`
-
-##Chage ubuntu python default 
-(**未必要做**)
-ubuntu14.04 LTS上裝有兩個版本的Python：python2.7.6 與 python3.4.3，所以分為兩種command
-1. python
-2. python3
-
-可以使用以下命令來修改默認的 Python 版本：
-
-`sudo cp /usr/bin/python /usr/bin/python_bak   ＃備份`
-`sudo rm /usr/bin/python #删除`
-`sudo ln -s /usr/bin/python3.4 /usr/bin/python   #建立路徑 python3.4`
-
-這樣在 terminal 中 輸入 python 時，啟動的就是 3.4 版本了。
- 
+以上設定完後可以使用 Theano 官方提供 [source code](http://deeplearning.net/software/theano/tutorial/using_gpu.html) 做測試，執行結果會告知是使用 CPU or GPU 做計算
