@@ -8,7 +8,7 @@
 ## Install depency 
 官方主要推薦的是 LAPACK 與 BLAS
 
-` sudo apt-get install libopenblas-dev liblapack-devlanguage
+` sudo apt-get install libopenblas-dev liblapack-dev
 `
 
 ## Install Armadillo
