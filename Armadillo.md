@@ -15,7 +15,7 @@
 
 先到 [官方](http://arma.sourceforge.net/) 下載
 ```
-tar -Jxvf armadillo-7.500.2.tar.xz
+tar -Jxvf armadillo-7.600.1.tar.xz
 
 # 接著編譯
 cmake .
